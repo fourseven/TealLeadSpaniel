@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103A910D1979E1D80033BF0F /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103A910C1979E1D80033BF0F /* SessionService.swift */; };
+		103A910E1979E1D80033BF0F /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103A910C1979E1D80033BF0F /* SessionService.swift */; };
 		E520EFC51979D4DA00493918 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC41979D4DA00493918 /* AppDelegate.swift */; };
 		E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC61979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld */; };
 		E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC91979D4DA00493918 /* ViewController.swift */; };
@@ -26,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		103A910C1979E1D80033BF0F /* SessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionService.swift; sourceTree = "<group>"; };
 		E520EFBF1979D4DA00493918 /* TealLeadSpaniel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TealLeadSpaniel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E520EFC31979D4DA00493918 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E520EFC41979D4DA00493918 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		103A910B1979E1A20033BF0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				103A910C1979E1D80033BF0F /* SessionService.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		E520EFB61979D4DA00493918 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +88,7 @@
 		E520EFC11979D4DA00493918 /* TealLeadSpaniel */ = {
 			isa = PBXGroup;
 			children = (
+				103A910B1979E1A20033BF0F /* Model */,
 				E520EFC41979D4DA00493918 /* AppDelegate.swift */,
 				E520EFC91979D4DA00493918 /* ViewController.swift */,
 				E520EFCB1979D4DA00493918 /* Main.storyboard */,
@@ -211,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				103A910D1979E1D80033BF0F /* SessionService.swift in Sources */,
 				E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */,
 				E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */,
 				E520EFC51979D4DA00493918 /* AppDelegate.swift in Sources */,
@@ -221,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				103A910E1979E1D80033BF0F /* SessionService.swift in Sources */,
 				E520EFDB1979D4DA00493918 /* TealLeadSpanielTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +415,7 @@
 				E520EFE01979D4DA00493918 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E520EFE11979D4DA00493918 /* Build configuration list for PBXNativeTarget "TealLeadSpanielTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +424,7 @@
 				E520EFE31979D4DA00493918 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
