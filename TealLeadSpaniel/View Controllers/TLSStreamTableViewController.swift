@@ -10,6 +10,7 @@ import UIKit
 
 class TLSStreamTableViewController: UITableViewController {
 
+    let allPosts:NSMutableArray? = NSMutableArray()
     
     convenience init() {
         self.init(style: .Plain)
@@ -19,11 +20,8 @@ class TLSStreamTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        var post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
+        allPosts?.addObject(post)
     }
 
 
@@ -38,14 +36,14 @@ class TLSStreamTableViewController: UITableViewController {
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+        return allPosts!.count
     }
 
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat
     {
-        let post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
-        
-        return TLSStreamTableViewCell.heightForContent(post!)
+
+        var post:TLSPost = allPosts?.objectAtIndex(indexPath.row) as TLSPost
+        return TLSStreamTableViewCell.heightForContent(post)
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
@@ -56,8 +54,8 @@ class TLSStreamTableViewController: UITableViewController {
             cell = TLSStreamTableViewCell(style:.Default, reuseIdentifier: "cellidentifier")
         }
         
-        let post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
-        cell?.configureWithPost(post!)
+        var post:TLSPost = allPosts?.objectAtIndex(indexPath.row) as TLSPost
+        cell?.configureWithPost(post)
         
         return cell
     }
