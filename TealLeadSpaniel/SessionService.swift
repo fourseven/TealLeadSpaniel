@@ -46,7 +46,7 @@ class SessionService {
         advertiser.startAdvertisingPeer()
         
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
-        serviceBrowserDelegate = ServiceBrowserDelegate(session: session)
+        serviceBrowserDelegate = ServiceBrowserDelegate(session: session, myPeerID: peerID)
         serviceBrowser.delegate = serviceBrowserDelegate
         serviceBrowser.startBrowsingForPeers()
     }
