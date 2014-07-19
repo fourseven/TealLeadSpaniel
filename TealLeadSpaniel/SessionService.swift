@@ -10,7 +10,7 @@ import Foundation
 
 import MultipeerConnectivity
 
-class SessionService {
+class SessionService : NSObject {
     
     let peerID: MCPeerID
     let session: MCSession
@@ -32,7 +32,6 @@ class SessionService {
     var inviteePeople:MCPeerID[] = []
     
     init(name:String){
-        
         peerID = MCPeerID(displayName: "Anonymous\(UIDevice.currentDevice().identifierForVendor.UUIDString)")
         
         // Create the session that peers will be invited/join into.
@@ -43,9 +42,10 @@ class SessionService {
         //init(peer myPeerID: MCPeerID!, discoveryInfo info: NSDictionary!, serviceType: String!)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: info, serviceType: serviceType)
         
-
-        
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
+        
+        
+        super.init()
         
         serviceBrowserDelegate = ServiceBrowserDelegate(session: session, myPeerID: peerID, sessionService: self)
         serviceBrowser.delegate = serviceBrowserDelegate
@@ -57,6 +57,7 @@ class SessionService {
         advertiser.delegate = advertiserDelegate
         
         advertiser.startAdvertisingPeer()
+
     }
     
     func onReceive(newHandler:(String) -> Void){

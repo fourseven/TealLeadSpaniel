@@ -39,13 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         var timeDelay = CGFloat(arc4random_uniform(30))
-        var timer = NSTimer.scheduledTimerWithTimeInterval(timeDelay, target: self, selector: Selector("startSession"), userInfo: nil, repeats: false)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(timeDelay, target: self.session, selector: Selector("start"), userInfo: nil, repeats: false)
         return true
-    }
-    
-    func startSession() {
-        println("Calling session.start")
-        session?.start()
     }
 
     func applicationWillResignActive(application: UIApplication) {
