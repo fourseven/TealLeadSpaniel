@@ -46,7 +46,6 @@ class SessionService {
 
         
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
-        serviceBrowser.startBrowsingForPeers()
         
         serviceBrowserDelegate = ServiceBrowserDelegate(session: session, myPeerID: peerID, sessionService: self)
         serviceBrowser.delegate = serviceBrowserDelegate
@@ -66,6 +65,10 @@ class SessionService {
         
     }
     
+    func start() {
+        serviceBrowser.startBrowsingForPeers()
+    }
+    
     
     func send(text:String){
         // Send a data message to a list of destination peers
@@ -74,6 +77,8 @@ class SessionService {
         let data = text.dataUsingEncoding(NSUTF8StringEncoding)
         
         var error : NSError?
+        
+        println("The connectedPeer count is \(session.connectedPeers.count)")
         
         session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: &error)
         

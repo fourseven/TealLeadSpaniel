@@ -18,6 +18,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        session = SessionService(name: "My Name")
+        
+        session?.onReceive {
+            (text) -> Void in
+            self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -27,13 +33,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func doStuff(sender: AnyObject) {
-        
-        session = SessionService(name: "My Name")
-        
-        session?.onReceive {
-            (text) -> Void in
-            self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
-        }
+        session?.start()
     }
 
     @IBAction func sendHello(sender: AnyObject) {
