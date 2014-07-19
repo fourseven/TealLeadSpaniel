@@ -158,24 +158,33 @@ class AdvertiserDelegate: NSObject, MCNearbyServiceAdvertiserDelegate{
     
 }
 
-
-
 class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
     
     let session: MCSession
     
     let inviteTimeout: NSTimeInterval = 30 //30 seconds is the default anyway
     
-    init(session: MCSession){
+    let myPeerID: MCPeerID
+    
+    init(session: MCSession, myPeerID: MCPeerID){
         self.session = session
+        self.myPeerID = myPeerID
     }
     
     // Found a nearby advertising peer
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!){
         println("Found a nearby advertising peer")
         
-        browser?.invitePeer(peerID, toSession: session, withContext: nil, timeout: inviteTimeout)
+        if peerID?.displayName == myPeerID.displayName {
+            println("I have found myself :-)")
+        }
         
+        if peerID?.displayName != myPeerID.displayName {
+            
+            println("I have found SOMEONE ELSE :-) ... inviting !")
+            
+            browser?.invitePeer(peerID, toSession: session, withContext: nil, timeout: inviteTimeout)
+        }
     }
     
     // A nearby peer has stopped advertising
