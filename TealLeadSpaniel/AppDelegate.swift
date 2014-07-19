@@ -12,7 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var session:SessionService?
+    var session: SessionService?
     
     @lazy var window: UIWindow = {
         
@@ -34,7 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         session = SessionService(name: "My Name")
         
         session?.onReceive {
-            (text) -> Void in
+            (serializedPost:NSData) -> Void in
+            var post = NSKeyedUnarchiver.unarchiveObjectWithData(serializedPost) as TLSPost
+            var notification = NSNotification()
+            NSNotificationCenter.defaultCenter().postNotificationName("postReceived", object: post)
             //self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
         }
         

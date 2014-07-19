@@ -35,6 +35,8 @@ class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDele
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasHidden:", name: UIKeyboardDidHideNotification, object: nil)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("notificationWasReceived"), name: "postReceived", object: nil)
+        
         self.navigationController.view.addSubview(createPostView)
     }
 
@@ -86,6 +88,13 @@ class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDele
     func doneKeyWasPressed(content: NSString) {
         var post:TLSPost = TLSPost(author: "Matt", content: content)
         allPosts?.addObject(post)
+        var delegate = UIApplication.sharedApplication().delegate as AppDelegate
+        delegate.session?.send(post)
+        tableView.reloadData()
+    }
+    
+    func notificationWasReceived(notification: NSNotification) {
+        allPosts?.addObject(notification.object)
         tableView.reloadData()
     }
     

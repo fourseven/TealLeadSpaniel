@@ -60,7 +60,7 @@ class SessionService : NSObject {
 
     }
     
-    func onReceive(newHandler:(String) -> Void){
+    func onReceive(newHandler:(NSData) -> Void){
         
         sessionDelegate.handler = newHandler
         
@@ -71,11 +71,11 @@ class SessionService : NSObject {
     }
     
     
-    func send(text:String){
+    func send(post:TLSPost){
         // Send a data message to a list of destination peers
         //func sendData(data: NSData!, toPeers peerIDs: AnyObject[]!, withMode mode: MCSessionSendDataMode, error: NSErrorPointer) -> Bool
         
-        let data = text.dataUsingEncoding(NSUTF8StringEncoding)
+        let data:NSData = NSKeyedArchiver.archivedDataWithRootObject(post)
         
         var error : NSError?
         
@@ -94,7 +94,7 @@ class SessionService : NSObject {
 
 class SessionDelegate: NSObject, MCSessionDelegate {
     
-    var handler:(String) -> Void
+    var handler:(NSData) -> Void
     
     let sessionService:SessionService
     
@@ -128,8 +128,8 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
         println("Received data from remote peer")
         
-        let msg:String = NSString(data:data, encoding:NSUTF8StringEncoding)
-        self.handler(msg)
+//        let msg:String = NSString(data:data, encoding:NSUTF8StringEncoding)
+//        self.handler(msg)
     }
     
     // Received a byte stream from remote peer

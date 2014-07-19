@@ -11,7 +11,6 @@
 		AF424986197A1FDE004C2201 /* SessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF424985197A1FDE004C2201 /* SessionService.swift */; };
 		E520EFC51979D4DA00493918 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC41979D4DA00493918 /* AppDelegate.swift */; };
 		E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC61979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld */; };
-		E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFC91979D4DA00493918 /* ViewController.swift */; };
 		E520EFCD1979D4DA00493918 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E520EFCB1979D4DA00493918 /* Main.storyboard */; };
 		E520EFCF1979D4DA00493918 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E520EFCE1979D4DA00493918 /* Images.xcassets */; };
 		E520EFDB1979D4DA00493918 /* TealLeadSpanielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFDA1979D4DA00493918 /* TealLeadSpanielTests.swift */; };
@@ -38,7 +37,6 @@
 		E520EFC31979D4DA00493918 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E520EFC41979D4DA00493918 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E520EFC71979D4DA00493918 /* TealLeadSpaniel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TealLeadSpaniel.xcdatamodel; sourceTree = "<group>"; };
-		E520EFC91979D4DA00493918 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E520EFCC1979D4DA00493918 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E520EFCE1979D4DA00493918 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E520EFD41979D4DA00493918 /* TealLeadSpanielTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TealLeadSpanielTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +92,6 @@
 				E520EFE71979E4B800493918 /* Cells */,
 				E520EFE41979E10E00493918 /* View Controllers */,
 				E520EFC41979D4DA00493918 /* AppDelegate.swift */,
-				E520EFC91979D4DA00493918 /* ViewController.swift */,
 				E520EFCB1979D4DA00493918 /* Main.storyboard */,
 				AF424985197A1FDE004C2201 /* SessionService.swift */,
 				E520EFCE1979D4DA00493918 /* Images.xcassets */,
@@ -260,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */,
 				E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */,
 				E520EFEF197A01A200493918 /* TLSCreatePostView.swift in Sources */,
 				E520EFE91979E4DA00493918 /* TLSStreamTableViewCell.swift in Sources */,
