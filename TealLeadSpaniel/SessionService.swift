@@ -205,6 +205,7 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
             println("I have found myself :-)")
         }
         var invitedCount = sessionService.inviteePeople.filter { $0 == peerID }.count
+        println("The invited count for peer \(peerID.displayName) was \(invitedCount)")
         if peerID?.displayName != myPeerID.displayName && invitedCount == 0 {
             
             println("I have found SOMEONE ELSE :-) ... inviting ! > displayName: \(peerID?.displayName)")
