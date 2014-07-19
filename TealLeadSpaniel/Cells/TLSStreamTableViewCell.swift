@@ -16,7 +16,7 @@ class TLSStreamTableViewCell: UITableViewCell {
     
     @lazy var authorLabel : UILabel =
     {
-        var temporaryLabel : UILabel = UILabel()
+        var temporaryLabel : UILabel = UILabel(frame: CGRectZero)
         temporaryLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         temporaryLabel.textColor = UIColor.redColor()
         return temporaryLabel
@@ -24,7 +24,7 @@ class TLSStreamTableViewCell: UITableViewCell {
     
     @lazy var contentLabel : UILabel =
     {
-        var temporaryLabel : UILabel = UILabel()
+        var temporaryLabel : UILabel = UILabel(frame: CGRectZero)
         temporaryLabel.numberOfLines = 0
 
         return temporaryLabel

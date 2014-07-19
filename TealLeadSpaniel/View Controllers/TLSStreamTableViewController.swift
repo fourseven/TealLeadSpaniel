@@ -8,10 +8,19 @@
 
 import UIKit
 
-class TLSStreamTableViewController: UITableViewController {
-
-    let allPosts:NSMutableArray? = NSMutableArray()
+class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDelegate {
     
+    var keyboardBottom:CGFloat = 0
+    
+    @lazy var createPostView : TLSCreatePostView =
+    {
+        var postView : TLSCreatePostView = TLSCreatePostView(frame: CGRectZero)
+        postView.delegate = self
+        return postView
+    }()
+    
+    let allPosts:NSMutableArray? = NSMutableArray()
+
     convenience init() {
         self.init(style: .Plain)
         self.title = "Stream"
@@ -19,23 +28,32 @@ class TLSStreamTableViewController: UITableViewController {
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        var post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
-        allPosts?.addObject(post)
+
+        keyboardBottom = self.view.bounds.height
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasHidden:", name: UIKeyboardDidHideNotification, object: nil)
+        
+        self.navigationController.view.addSubview(createPostView)
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        var createPostFrame:CGRect = CGRectZero
+        createPostFrame.size.height = 200.0
+        createPostFrame.size.width = self.view.bounds.width
+        createPostFrame.origin.y = keyboardBottom - createPostFrame.height;
+        createPostView.frame = createPostFrame;
+    }
 
     // #pragma mark - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView?, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return allPosts!.count
     }
 
@@ -60,5 +78,40 @@ class TLSStreamTableViewController: UITableViewController {
         return cell
     }
 
+    // Create Post View Delegate
+    func createPostViewWasTouched() {
 
+    }
+    
+    func doneKeyWasPressed(content: NSString) {
+        var post:TLSPost = TLSPost(author: "Matt", content: content)
+        allPosts?.addObject(post)g
+        tableView.reloadData()
+    }
+    
+    func keyboardWasShown(notification:NSNotification)
+    {
+        var keyboardSize:CGSize = notification.userInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey).CGRectValue().size
+        keyboardBottom = keyboardSize.height
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            
+            self.createPostView.frame.origin.y = keyboardSize.height - self.createPostView.frame.height
+            
+            }), completion:nil)
+
+    }
+    
+    func keyboardWasHidden(notification:NSNotification)
+    {
+        keyboardBottom = self.view.bounds.height
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            
+            self.createPostView.frame.origin.y = self.view.bounds.height - self.createPostView.frame.height
+            
+            }), completion: nil)
+    }
+    
+    
 }

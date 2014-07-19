@@ -16,6 +16,7 @@
 		E520EFE61979E14700493918 /* TLSStreamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFE51979E14700493918 /* TLSStreamTableViewController.swift */; };
 		E520EFE91979E4DA00493918 /* TLSStreamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFE81979E4DA00493918 /* TLSStreamTableViewCell.swift */; };
 		E520EFEC1979E64400493918 /* TLSPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFEB1979E64400493918 /* TLSPost.swift */; };
+		E520EFEF197A01A200493918 /* TLSCreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFEE197A01A200493918 /* TLSCreatePostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		E520EFE51979E14700493918 /* TLSStreamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSStreamTableViewController.swift; sourceTree = "<group>"; };
 		E520EFE81979E4DA00493918 /* TLSStreamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSStreamTableViewCell.swift; sourceTree = "<group>"; };
 		E520EFEB1979E64400493918 /* TLSPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSPost.swift; sourceTree = "<group>"; };
+		E520EFEE197A01A200493918 /* TLSCreatePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSCreatePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		E520EFC11979D4DA00493918 /* TealLeadSpaniel */ = {
 			isa = PBXGroup;
 			children = (
+				E520EFED197A018200493918 /* Views */,
 				E520EFEA1979E58400493918 /* Models */,
 				E520EFE71979E4B800493918 /* Cells */,
 				E520EFE41979E10E00493918 /* View Controllers */,
@@ -143,6 +146,14 @@
 				E520EFEB1979E64400493918 /* TLSPost.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E520EFED197A018200493918 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E520EFEE197A01A200493918 /* TLSCreatePostView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +257,7 @@
 			files = (
 				E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */,
 				E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */,
+				E520EFEF197A01A200493918 /* TLSCreatePostView.swift in Sources */,
 				E520EFE91979E4DA00493918 /* TLSStreamTableViewCell.swift in Sources */,
 				E520EFC51979D4DA00493918 /* AppDelegate.swift in Sources */,
 				E520EFE61979E14700493918 /* TLSStreamTableViewController.swift in Sources */,
@@ -437,6 +449,7 @@
 				E520EFE01979D4DA00493918 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E520EFE11979D4DA00493918 /* Build configuration list for PBXNativeTarget "TealLeadSpanielTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +458,7 @@
 				E520EFE31979D4DA00493918 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
