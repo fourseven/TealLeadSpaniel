@@ -18,13 +18,17 @@ class SessionService {
     let serviceBrowser: MCNearbyServiceBrowser
     
     //delegates
-    let sessionDelegate = SessionDelegate()
+    let sessionDelegate: SessionDelegate!
     let advertiserDelegate: AdvertiserDelegate
-    let serviceBrowserDelegate: ServiceBrowserDelegate
+    let serviceBrowserDelegate: ServiceBrowserDelegate!
     
     //config stuff
     let serviceType = "ramdom"
     let info = ["key":"value"]
+    
+    //
+    var connectedPeople:MCPeerID[] = []
+    var invitedPeople:MCPeerID[] = []
     
     init(name:String){
         
@@ -35,8 +39,6 @@ class SessionService {
         // Also you can set the encryption preference for the session.
         session = MCSession(peer: peerID)//[[MCSession alloc] initWithPeer:peerID securityIdentity:nil encryptionPreference:MCEncryptionRequired];
         
-        session.delegate = sessionDelegate
-        
         //init(peer myPeerID: MCPeerID!, discoveryInfo info: NSDictionary!, serviceType: String!)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: info, serviceType: serviceType)
         
@@ -46,9 +48,13 @@ class SessionService {
         advertiser.startAdvertisingPeer()
         
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
-        serviceBrowserDelegate = ServiceBrowserDelegate(session: session, myPeerID: peerID)
-        serviceBrowser.delegate = serviceBrowserDelegate
         serviceBrowser.startBrowsingForPeers()
+        
+        serviceBrowserDelegate = ServiceBrowserDelegate(session: session, myPeerID: peerID, sessionService: self)
+        serviceBrowser.delegate = serviceBrowserDelegate
+        
+        sessionDelegate = SessionDelegate(sessionService: self)
+        session.delegate = sessionDelegate?
     }
     
     func onReceive(newHandler:(String) -> Void){
@@ -66,7 +72,7 @@ class SessionService {
         
         var error : NSError?
         
-        session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: &error)
+        session.sendData(data, toPeers: connectedPeople, withMode: MCSessionSendDataMode.Reliable, error: &error)
         
         if let actualError = error {
             println("An Error Occurred: \(actualError)")
@@ -81,11 +87,15 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     
     var handler:(String) -> Void
     
-    init(){
+    let sessionService:SessionService
+    
+    init(sessionService:SessionService){
         handler = {
             (text) -> Void in
                 println("No handler defined.. so using default !")
         }
+        
+        self.sessionService = sessionService
     }
     
     // Remote peer changed state
@@ -93,7 +103,15 @@ class SessionDelegate: NSObject, MCSessionDelegate {
         println("Remote peer changed state - Connected to someone :-) -> \(peerID.displayName)  state: \(state)")
         
         if state == MCSessionState.Connected {
-            println("Yeahhh someone to talk to")
+            println("Yeahhh someone to talk to -> \(peerID?.displayName)")
+            
+            sessionService.connectedPeople.append(peerID)
+        }
+        if state == MCSessionState.Connecting {
+            println("Connecting to -> \(peerID?.displayName)")
+        }
+        if state == MCSessionState.NotConnected {
+            println("NotConnected to -> \(peerID?.displayName)")
         }
     }
     
@@ -101,20 +119,18 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
         println("Received data from remote peer")
         
-        //if let realHandler = handler {
-            let msg:String = NSString(data:data, encoding:NSUTF8StringEncoding)
-            self.handler(msg)
-        //}
+        let msg:String = NSString(data:data, encoding:NSUTF8StringEncoding)
+        self.handler(msg)
     }
     
     // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!){
-        println("Received data from remote peer")
+        println("Received data from remote peer -> \(peerID?.displayName)")
     }
     
     // Start receiving a resource from remote peer
     func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!){
-        println("Start receiving a resource from remote peer")
+        println("Start receiving a resource from remote peer -> \(peerID?.displayName)")
     }
     
     // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
@@ -162,13 +178,16 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
     
     let session: MCSession
     
+    let sessionService: SessionService
+    
     let inviteTimeout: NSTimeInterval = 30 //30 seconds is the default anyway
     
     let myPeerID: MCPeerID
     
-    init(session: MCSession, myPeerID: MCPeerID){
+    init(session: MCSession, myPeerID: MCPeerID, sessionService:SessionService){
         self.session = session
         self.myPeerID = myPeerID
+        self.sessionService = sessionService
     }
     
     // Found a nearby advertising peer
@@ -181,15 +200,17 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
         
         if peerID?.displayName != myPeerID.displayName {
             
-            println("I have found SOMEONE ELSE :-) ... inviting !")
+            println("I have found SOMEONE ELSE :-) ... inviting ! > displayName: \(peerID?.displayName)")
             
             browser?.invitePeer(peerID, toSession: session, withContext: nil, timeout: inviteTimeout)
+            
+            sessionService.invitedPeople.append(peerID)
         }
     }
     
     // A nearby peer has stopped advertising
     func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!){
-        println("A nearby peer has stopped advertising")
+        println("A nearby peer has stopped advertising-> \(peerID?.displayName)")
     }
     
     // Browsing did not start due to an error
