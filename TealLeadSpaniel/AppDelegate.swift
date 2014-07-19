@@ -11,12 +11,24 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-                            
-    var window: UIWindow?
-
+    
+    @lazy var window: UIWindow = {
+        
+        let win = UIWindow(frame: UIScreen.mainScreen().bounds)
+        win.backgroundColor = UIColor.whiteColor()
+        
+        let streamController:TLSStreamTableViewController = TLSStreamTableViewController()
+        let navigationController:UINavigationController = UINavigationController(rootViewController: streamController)
+        win.rootViewController = navigationController
+        
+        return win
+        
+        }()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
+        window.makeKeyAndVisible()
+
         return true
     }
 

@@ -13,6 +13,9 @@
 		E520EFCD1979D4DA00493918 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E520EFCB1979D4DA00493918 /* Main.storyboard */; };
 		E520EFCF1979D4DA00493918 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E520EFCE1979D4DA00493918 /* Images.xcassets */; };
 		E520EFDB1979D4DA00493918 /* TealLeadSpanielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFDA1979D4DA00493918 /* TealLeadSpanielTests.swift */; };
+		E520EFE61979E14700493918 /* TLSStreamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFE51979E14700493918 /* TLSStreamTableViewController.swift */; };
+		E520EFE91979E4DA00493918 /* TLSStreamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFE81979E4DA00493918 /* TLSStreamTableViewCell.swift */; };
+		E520EFEC1979E64400493918 /* TLSPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520EFEB1979E64400493918 /* TLSPost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		E520EFD41979D4DA00493918 /* TealLeadSpanielTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TealLeadSpanielTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E520EFD91979D4DA00493918 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E520EFDA1979D4DA00493918 /* TealLeadSpanielTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TealLeadSpanielTests.swift; sourceTree = "<group>"; };
+		E520EFE51979E14700493918 /* TLSStreamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSStreamTableViewController.swift; sourceTree = "<group>"; };
+		E520EFE81979E4DA00493918 /* TLSStreamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSStreamTableViewCell.swift; sourceTree = "<group>"; };
+		E520EFEB1979E64400493918 /* TLSPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSPost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 		E520EFC11979D4DA00493918 /* TealLeadSpaniel */ = {
 			isa = PBXGroup;
 			children = (
+				E520EFEA1979E58400493918 /* Models */,
+				E520EFE71979E4B800493918 /* Cells */,
+				E520EFE41979E10E00493918 /* View Controllers */,
 				E520EFC41979D4DA00493918 /* AppDelegate.swift */,
 				E520EFC91979D4DA00493918 /* ViewController.swift */,
 				E520EFCB1979D4DA00493918 /* Main.storyboard */,
@@ -110,6 +119,30 @@
 				E520EFD91979D4DA00493918 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E520EFE41979E10E00493918 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E520EFE51979E14700493918 /* TLSStreamTableViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E520EFE71979E4B800493918 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E520EFE81979E4DA00493918 /* TLSStreamTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E520EFEA1979E58400493918 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E520EFEB1979E64400493918 /* TLSPost.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,7 +246,10 @@
 			files = (
 				E520EFCA1979D4DA00493918 /* ViewController.swift in Sources */,
 				E520EFC81979D4DA00493918 /* TealLeadSpaniel.xcdatamodeld in Sources */,
+				E520EFE91979E4DA00493918 /* TLSStreamTableViewCell.swift in Sources */,
 				E520EFC51979D4DA00493918 /* AppDelegate.swift in Sources */,
+				E520EFE61979E14700493918 /* TLSStreamTableViewController.swift in Sources */,
+				E520EFEC1979E64400493918 /* TLSPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
