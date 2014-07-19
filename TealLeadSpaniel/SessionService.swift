@@ -129,7 +129,7 @@ class SessionDelegate: NSObject, MCSessionDelegate {
         println("Received data from remote peer")
         
 //        let msg:String = NSString(data:data, encoding:NSUTF8StringEncoding)
-//        self.handler(msg)
+        self.handler(data)
     }
     
     // Received a byte stream from remote peer
