@@ -75,7 +75,7 @@ class SessionService {
         
         var error : NSError?
         
-        session.sendData(data, toPeers: connectedPeople, withMode: MCSessionSendDataMode.Reliable, error: &error)
+        session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: &error)
         
         if let actualError = error {
             println("An Error Occurred: \(actualError)")
@@ -144,7 +144,9 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     // Made first contact with peer and have identity information about the remote peer (certificate may be nil)
     func session(session: MCSession!, didReceiveCertificate certificate: AnyObject[]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!){
         println("Made first contact with peer and have identity information about the remote peer (certificate may be nil)")
-        
+        if (certificateHandler != nil) {
+            certificateHandler(true)
+        }
         
         
     }
