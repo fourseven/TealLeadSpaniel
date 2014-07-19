@@ -12,6 +12,8 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var session:SessionService?
+    
     @lazy var window: UIWindow = {
         
         let win = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -28,8 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
         window.makeKeyAndVisible()
-
+        
+        session = SessionService(name: "My Name")
+        
+        session?.onReceive {
+            (text) -> Void in
+            //self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
+        }
+        
+        var timeDelay = CGFloat(arc4random_uniform(30))
+        var timer = NSTimer.scheduledTimerWithTimeInterval(timeDelay, target: self, selector: Selector("startSession"), userInfo: nil, repeats: false)
         return true
+    }
+    
+    func startSession() {
+        println("Calling session.start")
+        session?.start()
     }
 
     func applicationWillResignActive(application: UIApplication) {
