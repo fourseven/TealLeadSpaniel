@@ -85,7 +85,7 @@ class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDele
     
     func doneKeyWasPressed(content: NSString) {
         var post:TLSPost = TLSPost(author: "Matt", content: content)
-        allPosts?.addObject(post)g
+        allPosts?.addObject(post)
         tableView.reloadData()
     }
     
