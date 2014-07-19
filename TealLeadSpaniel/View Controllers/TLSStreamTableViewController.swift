@@ -43,7 +43,9 @@ class TLSStreamTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat
     {
-        return 60.0
+        let post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
+        
+        return TLSStreamTableViewCell.heightForContent(post!)
     }
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
@@ -54,7 +56,7 @@ class TLSStreamTableViewController: UITableViewController {
             cell = TLSStreamTableViewCell(style:.Default, reuseIdentifier: "cellidentifier")
         }
         
-        let post:TLSPost? = TLSPost(author: "Matt", content: "HELP US")
+        let post:TLSPost? = TLSPost(author: "Matt", content: "HELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP USHELP US")
         cell?.configureWithPost(post!)
         
         return cell
