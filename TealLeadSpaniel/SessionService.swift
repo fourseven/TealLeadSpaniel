@@ -19,7 +19,7 @@ class SessionService {
     
     //delegates
     let sessionDelegate: SessionDelegate!
-    let advertiserDelegate: AdvertiserDelegate
+    let advertiserDelegate: AdvertiserDelegate!
     let serviceBrowserDelegate: ServiceBrowserDelegate!
     
     //config stuff
@@ -29,6 +29,7 @@ class SessionService {
     //
     var connectedPeople:MCPeerID[] = []
     var invitedPeople:MCPeerID[] = []
+    var inviteePeople:MCPeerID[] = []
     
     init(name:String){
         
@@ -42,10 +43,7 @@ class SessionService {
         //init(peer myPeerID: MCPeerID!, discoveryInfo info: NSDictionary!, serviceType: String!)
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: info, serviceType: serviceType)
         
-        advertiserDelegate = AdvertiserDelegate(mySession: session)
-        advertiser.delegate = advertiserDelegate
-        
-        advertiser.startAdvertisingPeer()
+
         
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         serviceBrowser.startBrowsingForPeers()
@@ -55,6 +53,11 @@ class SessionService {
         
         sessionDelegate = SessionDelegate(sessionService: self)
         session.delegate = sessionDelegate?
+
+        advertiserDelegate = AdvertiserDelegate(mySession: session, sessionService: self)
+        advertiser.delegate = advertiserDelegate
+        
+        advertiser.startAdvertisingPeer()
     }
     
     func onReceive(newHandler:(String) -> Void){
@@ -151,9 +154,11 @@ class SessionDelegate: NSObject, MCSessionDelegate {
 class AdvertiserDelegate: NSObject, MCNearbyServiceAdvertiserDelegate{
     
     let session: MCSession
+    let sessionService: SessionService
     
-    init(mySession:MCSession){
+    init(mySession:MCSession, sessionService:SessionService){
         session = mySession
+        self.sessionService = sessionService
     }
     
     // Incoming invitation request.  Call the invitationHandler block with YES and a valid session to connect the inviting peer to the session.
@@ -163,6 +168,8 @@ class AdvertiserDelegate: NSObject, MCNearbyServiceAdvertiserDelegate{
         
         //always say yes !
         invitationHandler(true, session)
+        sessionService.inviteePeople.append(peerID)
+
     }
     
     // Advertising did not start due to an error
@@ -197,8 +204,8 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
         if peerID?.displayName == myPeerID.displayName {
             println("I have found myself :-)")
         }
-        
-        if peerID?.displayName != myPeerID.displayName {
+        var invitedCount = sessionService.inviteePeople.filter { $0 == peerID }.count
+        if peerID?.displayName != myPeerID.displayName && invitedCount == 0 {
             
             println("I have found SOMEONE ELSE :-) ... inviting ! > displayName: \(peerID?.displayName)")
             
