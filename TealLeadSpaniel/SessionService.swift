@@ -147,13 +147,12 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     }
     
     // Made first contact with peer and have identity information about the remote peer (certificate may be nil)
-    func session(session: MCSession!, didReceiveCertificate certificate: AnyObject[]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!){
+    func session(session: MCSession!, didReceiveCertificate certificate: AnyObject[]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
         println("Made first contact with peer and have identity information about the remote peer (certificate may be nil)")
-        if (certificateHandler != nil) {
+        if certificateHandler {
             certificateHandler(true)
         }
-        
-        
+
     }
     
 }
@@ -205,7 +204,7 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
     }
     
     // Found a nearby advertising peer
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!){
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) -> Void {
         println("Found a nearby advertising peer")
         
         if peerID?.displayName == myPeerID.displayName {
