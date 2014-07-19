@@ -40,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
         }
         
-        var timeDelay = CGFloat(arc4random_uniform(30))
-        var timer = NSTimer.scheduledTimerWithTimeInterval(timeDelay, target: self.session, selector: Selector("start"), userInfo: nil, repeats: false)
+        var timeInterval = NSTimeInterval(CGFloat(arc4random_uniform(30)))
+        var timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self.session, selector: Selector("start"), userInfo: nil, repeats: false)
         return true
     }
 
