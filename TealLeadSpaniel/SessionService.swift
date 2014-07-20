@@ -27,9 +27,7 @@ class SessionService : NSObject {
     let info = ["key":"value"]
     
     //
-    var connectedPeople:MCPeerID[] = []
-    var invitedPeople:MCPeerID[] = []
-    var inviteePeople:MCPeerID[] = []
+    var inviteePeople:[MCPeerID] = []
     
     init(name:String){
         peerID = MCPeerID(displayName: "Anonymous\(UIDevice.currentDevice().identifierForVendor.UUIDString)")
@@ -113,8 +111,6 @@ class SessionDelegate: NSObject, MCSessionDelegate {
         
         if state == MCSessionState.Connected {
             println("Yeahhh someone to talk to -> \(peerID?.displayName)")
-            
-            sessionService.connectedPeople.append(peerID)
         }
         if state == MCSessionState.Connecting {
             println("Connecting to -> \(peerID?.displayName)")
@@ -148,7 +144,7 @@ class SessionDelegate: NSObject, MCSessionDelegate {
     }
     
     // Made first contact with peer and have identity information about the remote peer (certificate may be nil)
-    func session(session: MCSession!, didReceiveCertificate certificate: AnyObject[]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
+    func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
         println("Made first contact with peer and have identity information about the remote peer (certificate may be nil)")
         if certificateHandler {
             certificateHandler(true)
@@ -205,7 +201,7 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
     }
     
     // Found a nearby advertising peer
-    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: NSDictionary!) -> Void {
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
         println("Found a nearby advertising peer")
         
         if peerID?.displayName == myPeerID.displayName {
@@ -219,7 +215,6 @@ class ServiceBrowserDelegate: NSObject, MCNearbyServiceBrowserDelegate {
             
             browser?.invitePeer(peerID, toSession: session, withContext: nil, timeout: inviteTimeout)
             
-            sessionService.invitedPeople.append(peerID)
         }
     }
     
