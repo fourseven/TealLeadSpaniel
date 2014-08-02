@@ -17,14 +17,14 @@ class TLSCreatePostView: UIView, UITextFieldDelegate {
 
     var delegate: TLSCreatePostViewDelegate?
     
-    @lazy var invisibleButton : UIButton =
+    lazy var invisibleButton : UIButton =
     {
         var temporaryButton : UIButton = UIButton()
         temporaryButton.addTarget(self, action: "invisibleButtonWasPresed", forControlEvents: .TouchUpInside)
         return temporaryButton
     }()
     
-    @lazy var contentTextView : UITextField =
+    lazy var contentTextView : UITextField =
     {
         var tempTextView : UITextField = UITextField()
         tempTextView.delegate = self

@@ -12,7 +12,7 @@ class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDele
     
     var keyboardBottom:CGFloat = 0
     
-    @lazy var createPostView : TLSCreatePostView =
+    lazy var createPostView : TLSCreatePostView =
     {
         var postView : TLSCreatePostView = TLSCreatePostView(frame: CGRectZero)
         postView.delegate = self
@@ -95,6 +95,7 @@ class TLSStreamTableViewController: UITableViewController, TLSCreatePostViewDele
     
     func notificationWasReceived(notification: NSNotification) {
         var post = notification.object as TLSPost
+        println(post.content)
         allPosts?.addObject(post)
         tableView.reloadData()
     }

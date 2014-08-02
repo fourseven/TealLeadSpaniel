@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var session: SessionService?
     
-    @lazy var window: UIWindow = {
+    lazy var window: UIWindow = {
         
         let win = UIWindow(frame: UIScreen.mainScreen().bounds)
         win.backgroundColor = UIColor.whiteColor()
@@ -39,8 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSNotificationCenter.defaultCenter().postNotificationName("postReceived", object: post)
             //self.incommingLog.text = "\(self.incommingLog.text) \n \(text)"
         }
+//        var randomInterval:Int = Int(rand(30))
         
-        var timeInterval = NSTimeInterval(CGFloat(arc4random_uniform(30)))
+        var timeInterval = NSTimeInterval(30) 
         var timer = NSTimer.scheduledTimerWithTimeInterval(timeInterval, target: self.session, selector: Selector("start"), userInfo: nil, repeats: false)
         return true
     }

@@ -1,3 +1,4 @@
+
 //
 //  TLSStreamTableViewCell.swift
 //  TealLeadSpaniel
@@ -14,7 +15,7 @@ class TLSStreamTableViewCell: UITableViewCell {
     let kLineWidth:CGFloat = 2.0
     let kLineInset:CGFloat = 10.0
     
-    @lazy var authorLabel : UILabel =
+    lazy var authorLabel : UILabel =
     {
         var temporaryLabel : UILabel = UILabel(frame: CGRectZero)
         temporaryLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
@@ -22,7 +23,7 @@ class TLSStreamTableViewCell: UITableViewCell {
         return temporaryLabel
     }()
     
-    @lazy var contentLabel : UILabel =
+    lazy var contentLabel : UILabel =
     {
         var temporaryLabel : UILabel = UILabel(frame: CGRectZero)
         temporaryLabel.numberOfLines = 0
@@ -30,7 +31,7 @@ class TLSStreamTableViewCell: UITableViewCell {
         return temporaryLabel
     }()
     
-    @lazy var colorLine : UIView =
+    lazy var colorLine : UIView =
     {
         var colorLine : UIView = UIView()
         colorLine.backgroundColor = UIColor.redColor()
